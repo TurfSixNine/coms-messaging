@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 
 const token = localStorage.getItem('token')
 export const axiosInstance = axios.create({
-    baseURL: 'http://ec2-100-24-9-198.compute-1.amazonaws.com:5000/',
+    baseURL: 'http://api.coms-messaging-21078062.com/',
     headers: {
         Authorization: `Bearer ${token}`
     }
