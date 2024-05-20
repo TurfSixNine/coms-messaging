@@ -88,7 +88,7 @@ const SendMessageContent: React.FC = () => {
         }
         const body = JSON.stringify({ ...messageForm })
 
-        const response = await axiosInstance.post("/message", body)
+        const response = await axiosInstance.post("/messages", body)
 
         if (response.status === 500 || response.status === 400) {
             setAlert({
