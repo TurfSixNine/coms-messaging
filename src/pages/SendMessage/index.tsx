@@ -122,7 +122,7 @@ const SendMessageContent: React.FC = () => {
             </Grid>
             <Grid item md={8} xs={10} marginBottom={7}>
                 <Stack direction="row" spacing={4} >
-                    {["Email", "SMS", "TTS"].map((chip, index) => {
+                    {["WhatsApp", "SMS", "TTS"].map((chip, index) => {
                         const isSelected = (messageForm.types.includes(chip))
                         return (<Chip
                             key={index} label={chip}

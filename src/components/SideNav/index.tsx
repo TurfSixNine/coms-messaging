@@ -26,7 +26,7 @@ const NavLinks = (props: { links: Link[] }) => {
         {props.links.map((link, index) => {
             const isActive: boolean = pathname === link.link;
             return (
-                <ListItem key={index} disablePadding >
+                <ListItem key={`${link}-${index}`} disablePadding >
                     <ListItemButton
                         style={{
                             backgroundColor: isActive ? "#757575" : "inherit",
