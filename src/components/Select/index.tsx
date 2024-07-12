@@ -20,12 +20,12 @@ interface SelectProps {
     onClick?: () => void;
     width?: number | string;
     placeholder?: string;
-    getValue?:(value: string)=> void; 
+    getValue?: (value: string) => void;
 }
 
 export const BasicSelect = (props: SelectProps) => {
     const handleChange = (event: SelectChangeEvent) => {
-        props?.getValue && props.getValue(event.target.value); 
+        props?.getValue && props.getValue(event.target.value);
     };
     return (
         <Box sx={{ minWidth: props.width || 350 }}>
@@ -35,10 +35,10 @@ export const BasicSelect = (props: SelectProps) => {
                     onChange={handleChange}
                     labelId="group-select"
                     variant="standard"
-                    MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                    MenuProps={{ PaperProps: { sx: { maxHeight: 300, maxWidth:250 } } }}
                 >
-                
-                    { props.menu.length === 0  ? (
+
+                    {props.menu.length === 0 ? (
                         <Stack
                             direction="row" justifyContent="space-between"
                             alignItems="center" padding="5px" marginTop="5px">
@@ -46,12 +46,23 @@ export const BasicSelect = (props: SelectProps) => {
                             <Button loading={false} onClick={props.onClick} btnTitle="Add a group" />
                         </Stack>
                     ) :
-                        props.menu.map((mx, index) =>  (
-                                    <MenuItem  key={index} value={mx.dial_code || mx.id}>{mx.dial_code || mx.name}</MenuItem>
-                                ))}
+                        props.menu.map((mx, index) => (
+                            <MenuItem key={index} value={mx.dial_code || mx.id}>
+                                {mx.dial_code ?
+                                    <span style={{ display: "flex"}}>
+                                        <span style={{margin:2}}> 
+                                            {mx.flag}
+                                        </span>
+                                        <span style={{margin:2}}> 
+                                            {mx.name}
+                                        </span>
+                                    </span>
+                                    :
+                                    mx.name}</MenuItem>
+                        ))}
 
                 </Select>
             </FormControl>
-        </Box>
+        </Box >
     );
 }
