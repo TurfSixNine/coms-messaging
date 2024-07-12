@@ -45,11 +45,13 @@ const chips: IChip[] = [
 const actions: IAction[] = [
     {
         name: "Block user",
-        icon: <BlockIcon sx={{ fontSize: 12 }} />
+        icon: <BlockIcon sx={{ fontSize: 12 }} />,
+        action:"block"
     },
     {
         name: "Update user",
-        icon: <ModeEditIcon sx={{ fontSize: 12 }} />
+        icon: <ModeEditIcon sx={{ fontSize: 12 }} />,
+        action:"update"
     },
 ]
 

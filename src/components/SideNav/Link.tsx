@@ -32,11 +32,11 @@ export const BasicUserLinks : Link[] = [
         link:"/groups",
         icon:<GroupIcon/>
     },
-    {
-        name: "Settings",
-        link: "/settings",
-        icon: <SettingsIcon />
-    }
+    // {
+    //     name: "Settings",
+    //     link: "/settings",
+    //     icon: <SettingsIcon />
+    // }
     
 ]
 
@@ -66,11 +66,11 @@ export const AdminUserLinks:Link[] = [
         link:"/messages",
         icon: <ForumIcon/>
     }, 
-    {
-        name: "Settings",
-        link: "/settings",
-        icon: <SettingsIcon />
-    }
+    // {
+    //     name: "Settings",
+    //     link: "/settings",
+    //     icon: <SettingsIcon />
+    // }
 ]
 
 
