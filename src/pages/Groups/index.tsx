@@ -5,7 +5,7 @@ import { BasicModal } from "../../components";
 import { BoxContainer } from './styles'
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import {  useState } from "react";
+import { useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { GroupGridRow, IAction, USER_ROLE, } from '../../interfaces'
 import { AddGroup } from './add-group'
@@ -26,11 +26,13 @@ import { AppDispatch, RootState } from "../../store";
 const actions: IAction[] = [
     {
         name: "More info",
-        icon: <EyeIcon sx={{ fontSize: 14 }} />
+        icon: <EyeIcon sx={{ fontSize: 14 }} />,
+        action:"info"
     },
     {
         name: "Delete user",
-        icon: <DeleteIcon color="error" sx={{ fontSize: 14 }} />
+        icon: <DeleteIcon color="error" sx={{ fontSize: 14 }} />,
+        action:"delete"
     },
 ]
 
@@ -66,16 +68,21 @@ const GroupPageContent: React.FC = () => {
             width: 100,
             sortable: false,
             renderCell: (params) => {
-                
+
                 const handleAction = async (action: string) => {
                     const id = params.id;
-                    const response = await axiosInstance.delete(`/group/${id}`) as AxiosResponse;
-                    console.log(response, action);
-                    dispatch(updateGroups(response.data))
+
+                    if (action === "delete") {
+                        const response = await axiosInstance.delete(`/group/${id}`) as AxiosResponse;
+                        // console.log(response, action);
+
+                        dispatch(updateGroups(response.data))
+                    }
+
                     // updateGroup(response.data)
                 }
                 // onView={onViewHandler} onDelete={onDeleteHandler}
-                return <ActionButton handleAction={(action)=> handleAction(action)} actions={actions} onClick={(event) => event.stopPropagation()} />
+                return <ActionButton handleAction={(action) => handleAction(action)} actions={actions} onClick={(event) => event.stopPropagation()} />
             }
 
         }
@@ -108,7 +115,7 @@ const GroupPageContent: React.FC = () => {
 
     </BoxContainer>
 }
-export const Groups = (props: {role: USER_ROLE}) => {
+export const Groups = (props: { role: USER_ROLE }) => {
     const { pathname } = useLocation();
 
     return (

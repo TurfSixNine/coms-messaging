@@ -6,8 +6,8 @@ export type CurrentUser = {
     email: string;
     role: USER_ROLE;
     id: string
-    createdAt: Date; 
-} 
+    createdAt: Date;
+}
 export interface GroupState {
     name: string;
     code: string;
@@ -26,7 +26,7 @@ export interface MessageGridRow {
     groupName: string;
     receipient: string;
     status: string;
-    date:string;
+    date: string;
 
 }
 
@@ -44,7 +44,7 @@ export interface MessageData {
     send_date: string;
     call_price: string;
     error_code: string | null,
-    group : GroupsData; 
+    group: GroupsData;
 
 
 }
@@ -62,5 +62,6 @@ export interface IUserContext {
 
 export interface IAction {
     name: string;
+    action: "delete" | "info"| "block" | "update";
     icon: ReactNode;
 }
