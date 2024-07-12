@@ -1,8 +1,16 @@
 import axios, { AxiosError } from 'axios'
 
 const token = localStorage.getItem('token')
+
+let url : string | undefined  = ""
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    url = process.env.REACT_APP_DEV_URL
+}else{
+        url= process.env.REACT_APP_PROD_URL
+}
+
 export const axiosInstance = axios.create({
-    baseURL: 'https://api.coms-messaging-21078062.com/',
+    baseURL: url,
     headers: {
         Authorization: `Bearer ${token}`
     }

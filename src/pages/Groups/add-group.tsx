@@ -49,11 +49,24 @@ export const AddGroup = () => {
         field: "",
         message: ""
     });
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        axiosInstance.get('https://countriesnow.space/api/v0.1/countries/codes')
-            .then(response => setCodes(response.data?.data || []))
+        // axiosInstance.get('https://countriesnow.space/api/v0.1/countries/codes')
+        axiosInstance.get('https://restcountries.com/v3.1/all')
+            .then(response => {
+                let country_codes = []
+            
+                country_codes = response.data.map((res :any) => {
+                    return {
+                        name: res.name?.common,
+                        dial_code: res.idd.root ? res.idd.root.concat(res.idd?.suffixes ? res.idd?.suffixes[0] :  "") : "",
+                        flag: res.flag
+                    }
+                });
+
+                setCodes(country_codes)
+            })
     }, [])
 
     const hasErrors = () => {
@@ -133,7 +146,7 @@ export const AddGroup = () => {
             }
             setLoading(false);
 
-            
+
 
         } catch (error) {
             console.log(error)
@@ -144,7 +157,7 @@ export const AddGroup = () => {
 
     }
     return (<Box component="form">
-       { alert.state && <Alert severity={alert.severity}>{alert.message}</Alert>}
+        {alert.state && <Alert severity={alert.severity}>{alert.message}</Alert>}
         <Typography variant="h6">Add a new group</Typography>
         {FORM.map((obj, index) => (
             <CustomInput

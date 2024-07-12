@@ -42,31 +42,36 @@ export const SignIn = () => {
     }
 
     const handleSubmit = async () => {
-        setLoading(true)
-        for (let key in loginData) {
-            if (loginData[key] === '') {
-                setAlert({
-                    message: "kindly enter all fields",
-                    severity: "warning",
-                    state: true
-                });
-                setLoading(false)
-
-                return
+        try {
+            setLoading(true)
+            for (let key in loginData) {
+                if (loginData[key] === '') {
+                    setAlert({
+                        message: "kindly enter all fields",
+                        severity: "warning",
+                        state: true
+                    });
+                    setLoading(false)
+    
+                    return
+                }
             }
+    
+            const response = await axiosInstance.post('/auth/sign-in', JSON.stringify(loginData)) as AxiosResponse;
+    
+            localStorage.setItem('token', response.data.token); 
+            dispatch(updateUser(response.data.user));
+            setLoading(false);
+            navigate('/sendmessage')
+            setAlert({
+                severity: 'success',
+                state: false,
+                message: ''
+            })
+        } catch (error) {
+            setLoading(false);
         }
-
-        const response = await axiosInstance.post('/auth/sign-in', JSON.stringify(loginData)) as AxiosResponse;
-
-        localStorage.setItem('token', response.data.token); 
-        dispatch(updateUser(response.data.user));
-        setLoading(false);
-        navigate('/sendmessage')
-        setAlert({
-            severity: 'success',
-            state: false,
-            message: ''
-        })
+       
     }
 
     return <BoxContainer>
